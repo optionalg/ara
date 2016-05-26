@@ -17,6 +17,7 @@ import os
 from ansible.constants import get_config, load_config_file
 
 DEFAULT_ARA_DIR = os.path.expanduser('~/.ara')
+DEFAULT_ARA_STATIC_PATH = os.path.join(DEFAULT_ARA_DIR, 'build')
 DEFAULT_DATABASE_PATH = os.path.join(DEFAULT_ARA_DIR, 'ansible.sqlite')
 DEFAULT_DATABASE = 'sqlite:///{}'.format(DEFAULT_DATABASE_PATH)
 DEFAULT_ARA_LOGFILE = os.path.join(DEFAULT_ARA_DIR, 'ara.log')
@@ -57,3 +58,10 @@ SQLALCHEMY_DATABASE_URI        = get_config(config, 'ara', 'database',
 SQLALCHEMY_ECHO                = get_config(config, 'ara', 'sqldebug',
                                             'ARA_SQL_DEBUG',
                                             DEFAULT_ARA_SQL_DEBUG)
+# Static generation
+FREEZER_RELATIVE_URLS = True
+FREEZER_DEFAULT_MIMETYPE = 'text/html'
+FREEZER_DESTINATION = get_config(
+    config, 'ara', 'static_path',
+    'ARA_STATIC_PATH',
+    DEFAULT_ARA_STATIC_PATH)
