@@ -16,6 +16,11 @@ import os
 
 from ansible.constants import get_config, load_config_file
 
+def str2bool(v):
+    """Convert string to boolean"""
+    return v.lower() in ("yes", "true", "t", "1")
+
+
 DEFAULT_ARA_DIR = os.path.expanduser('~/.ara')
 DEFAULT_DATABASE_PATH = os.path.join(DEFAULT_ARA_DIR, 'ansible.sqlite')
 DEFAULT_DATABASE = 'sqlite:///{}'.format(DEFAULT_DATABASE_PATH)
@@ -54,6 +59,6 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_DATABASE_URI        = get_config(config, 'ara', 'database',
                                             'ARA_DATABASE',
                                             DEFAULT_DATABASE)
-SQLALCHEMY_ECHO                = get_config(config, 'ara', 'sqldebug',
-                                            'ARA_SQL_DEBUG',
-                                            DEFAULT_ARA_SQL_DEBUG)
+SQLALCHEMY_ECHO                = str2bool(get_config(config, 'ara', 'sqldebug',
+                                                     'ARA_SQL_DEBUG',
+                                                     DEFAULT_ARA_SQL_DEBUG))
