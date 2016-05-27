@@ -16,6 +16,7 @@ import os
 
 from ansible.constants import get_config, load_config_file
 
+
 def str2bool(v):
     """Convert string to boolean"""
     return v.lower() in ("yes", "true", "t", "1")
